@@ -12,7 +12,7 @@
 		},
 		"masterVmSize": {
 			"type": "string",
-			"defaultValue": "Standard_DS2_v2",
+			"defaultValue": "Standard_D2_v3",
 			"allowedValues": [
 				"Standard_A4", "Standard_A5", "Standard_A6", "Standard_A7", "Standard_A8", "Standard_A9", "Standard_A10", "Standard_A11",
 				"Standard_D1", "Standard_D2", "Standard_D3", "Standard_D4",
@@ -36,7 +36,7 @@
 		},
 		"nodeVmSize": {
 			"type": "string",
-			"defaultValue": "Standard_DS2_v2",
+			"defaultValue": "Standard_D2_v3",
 			"allowedValues": [
 				"Standard_A4", "Standard_A5", "Standard_A6", "Standard_A7", "Standard_A8", "Standard_A9", "Standard_A10", "Standard_A11",
 				"Standard_D1", "Standard_D2", "Standard_D3", "Standard_D4",
@@ -60,7 +60,7 @@
 		},
 		"infraVmSize": {
 			"type": "string",
-			"defaultValue": "Standard_DS2_v2",
+			"defaultValue": "Standard_D2_v3",
 			"allowedValues": [
 				"Standard_A4", "Standard_A5", "Standard_A6", "Standard_A7", "Standard_A8", "Standard_A9", "Standard_A10", "Standard_A11",
 				"Standard_D1", "Standard_D2", "Standard_D3", "Standard_D4",
@@ -93,8 +93,8 @@
 		},
 		"masterInstanceCount": {
 			"type": "int",
-			"defaultValue": 3,
-			"allowedValues": [3, 5],
+			"defaultValue": 1,
+			"allowedValues": [1, 2, 3, 5],
 			"metadata": {
 				"description": "Number of OpenShift masters."
 			}
@@ -118,9 +118,9 @@
 		},
 		"dataDiskSize": {
 			"type": "int",
-			"defaultValue": 128,
+			"defaultValue": 32,
 			"minValue": 1,
-			"allowedValues": [128, 512, 1023],
+			"allowedValues": [32, 64, 128, 512, 1023],
 			"metadata": {
 				"description": "Size of Datadisk in GB for Docker volume"
 			}
@@ -763,19 +763,37 @@
 			"name": "masteravailabilityset",
 			"location": "[variables('location')]",
 			"apiVersion": "[variables('apiVersionCompute')]",
-			"properties": {}
+			"sku": {
+				"name": "Aligned"
+			 },  
+			"properties": {
+				"platformUpdateDomainCount": 5,    
+				"platformFaultDomainCount": 3
+			}
 		}, {
 			"type": "Microsoft.Compute/availabilitySets",
 			"name": "infraavailabilityset",
 			"location": "[variables('location')]",
 			"apiVersion": "[variables('apiVersionCompute')]",
-			"properties": {}
+			"sku": {
+				"name": "Aligned"
+			 },  
+			"properties": {
+				"platformUpdateDomainCount": 5,    
+				"platformFaultDomainCount": 3
+			}
 		}, {
 			"type": "Microsoft.Compute/availabilitySets",
 			"name": "nodeavailabilityset",
 			"location": "[variables('location')]",
 			"apiVersion": "[variables('apiVersionCompute')]",
-			"properties": {}
+			"sku": {
+				"name": "Aligned"
+			 },  
+			"properties": {
+				"platformUpdateDomainCount": 5,    
+				"platformFaultDomainCount": 3
+			}
 		}, {
 			"type": "Microsoft.Network/loadBalancers",
 			"name": "[variables('masterLoadBalancerName')]",
