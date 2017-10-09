@@ -269,6 +269,12 @@
 			"Standard_A4": {
 				"storageAccountType": "Standard_LRS"
 			},
+			"Standard_A2_v2": {
+				"storageAccountType": "Standard_LRS"
+			},
+			"Standard_A1_v2": {
+				"storageAccountType": "Standard_LRS"
+			},
 			"Standard_A5": {
 				"storageAccountType": "Standard_LRS"
 			},
